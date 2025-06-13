@@ -90,21 +90,18 @@ body {
 							<td th:text="${user.gender}"></td>
 							<td th:text="${user.phno}"></td>
 							<td th:text="${user.dob}"></td>
-							<td><a href="" class="btn btn-primary">Edit</a></td>
-							<td><a href="" class="btn btn-danger">Delete</a></td>
-							
+							<td><a th:href="@{/edit?(id=${user.userId})}" class="btn btn-primary">Edit</a></td>
+							<td><a th:href="@{/delete?(id=${user.userId})}" class="btn btn-danger">Delete</a></td>
+
 							<span th:switch="${user.isActiveSw}"> 
 								<i th:case="Y" class="fas fa-check red-text">
-									<th> <a href=""class="btn btn-danger">De-Activate</a></th>
-								</i> 
+									<td><a th:href="@{/update?(id=${user.userId} , status =N)}" class="btn btn-danger">De-Activate</a></td>
+								</i>
 								<i th:case="N" class="fas fa-times orange-text">
-								<th><a href="" class="btn btn-success">Activate</a></th></i>
+									<td><a th:href="@{/update?(id=${user.userId} ,status =Y)}" class="btn btn-success">Activate</a></td>
+								</i>
 							</span>
-							
-							
-							</tr>
-
-							
+						</tr>
 					</tbody>
 
 

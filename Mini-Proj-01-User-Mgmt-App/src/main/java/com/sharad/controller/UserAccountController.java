@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sharad.entity.UserAccount;
 import com.sharad.service.UserAccountService;
@@ -38,5 +39,23 @@ public class UserAccountController {
 		model.addAttribute("users", usersList);
 		return "view-user"; // Assuming you have a userList.html template to display the list of users
 	}
-
+	@GetMapping("/edit")
+	public String editUserAccount(@RequestParam("id") Integer userId, Model model) {
+		UserAccount user = userAccountService.getUserAccountBy(userId);
+		model.addAttribute("User" ,user);
+		return "index"; 
+	}
+	
+	@GetMapping("/delete")
+	public String deleteUserAccount(@RequestParam("id") Integer userId) {
+		boolean deleteUserAccount = userAccountService.deleteUserAccount(userId);
+		return "redirect:/users"; // Redirect to the user list after deletion
+	}
+	
+	@GetMapping("/update")
+	public String updateUserStatus(@RequestParam("id") Integer userId, 
+														@RequestParam("status") String status) {
+		userAccountService.updateUserStatus(userId, status);
+		return "redirect:/users"; // Redirect to the user list after updating status
+	}
 }
