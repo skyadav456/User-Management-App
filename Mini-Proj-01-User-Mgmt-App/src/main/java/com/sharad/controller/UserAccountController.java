@@ -42,7 +42,7 @@ public class UserAccountController {
 	public String editUserAccount(@RequestParam("id") Integer userId, Model model) {
 		UserAccount user = userAccountService.getUserAccountBy(userId);
 		model.addAttribute("User" ,user);
-		return "index"; 
+		return "edit-user"; // Assuming you have an edit-user.html template to edit user details
 	}
 	
 	@GetMapping("/delete")
